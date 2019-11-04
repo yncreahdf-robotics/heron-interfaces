@@ -10,11 +10,11 @@ Created on Tue Oct 15 14:11:40 2019
 import socket
 
 
-import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument("name")
-args = parser.parse_args()
-print(args.name)
+#import argparse
+#parser = argparse.ArgumentParser()
+#parser.add_argument("name")
+#args = parser.parse_args()
+#print(args.name)
   
 
 def RecovPass():
@@ -27,18 +27,15 @@ def TakeName():
     pass
 
 
-
 def Main():
     
     #name=TakeName()
     
     Server = '10.224.0.21'
-    
     passwd=RecovPass()
   
     # Define the port on which you want to connect 
     port = 22322
-  
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
   
     # connect to server on local computer 
