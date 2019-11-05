@@ -6,34 +6,54 @@ This is a temporary script file.
 """
 
 
-import mysql.connector 
+import mysql.connector
 import os
 import time
 
 def InsertID(askedname):
     askedname=FindID(askedname)
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
-                                             
-        mySql_insert_query = """INSERT INTO AVAILABLE (Id, Status, ComAvailable) 
-                               VALUES 
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        user='root',password='HeronLeR0B0T')
+
+        mySql_insert_query = """INSERT INTO AVAILABLE (Id, Status, ComAvailable)
+                               VALUES
                                ('"""+askedname+"""', 'available', 'LastTest') """
-    
+
         cursor = connection.cursor()
         result = cursor.execute(mySql_insert_query)
         connection.commit()
         cursor.close()
-    
+
     except mysql.connector.Error as error:
         print("Failed to insert record into AVAILABLE {}".format(error))
-        
+
     return askedname
-    
-def CountID(condition):
-    
+
+#def InsertCOMMANDS(destination,function,status,source,com=None):
+def InsertCOMMANDS():
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
-    
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        user='root',password='HeronLeR0B0T')
+
+        mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source,ComOrder) VALUES ('centralTest','DICTIONNARY','nuc-02','waiting','central-01','JustATest');"
+
+        cursor = connection.cursor()
+        result = cursor.execute(mySql_insert_query)
+        connection.commit()
+        cursor.close()
+
+    except mysql.connector.Error as error:
+        print("Failed to insert record into AVAILABLE {}".format(error))
+
+    return True
+
+def CountID(condition):
+
+    try:
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        user='root',password='HeronLeR0B0T')
+
         sql_select_Query = "select * from AVAILABLE where "+condition+";"
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
@@ -44,18 +64,18 @@ def CountID(condition):
             pass
     except :
         print("Error reading data from MySQL table")
-        
+
     finally:
         if (connection.is_connected()):
             connection.close()
             cursor.close()
     return len(records)
-    
-    
+
+
 def DisplayOneTime(table):
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
-    
+
         sql_select_Query = "select * from "+table+";"
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
@@ -70,22 +90,36 @@ def DisplayOneTime(table):
     except AssertionError as error:
         print(error)
         print("Error reading data from MySQL table")
-        
+
     finally:
         if (connection.is_connected()):
             connection.close()
             cursor.close()
-    
-    
+
+
 def Display(table,temp):#temp en second
-    
+
     while(True):
         os.system("clear")
         DisplayOneTime(table)
         time.sleep(temp)
-    
+
+def DisplayAVAILABLE():
+    Display("AVAILABLE",0.5)
+
+def DisplayCOMMANDS():
+    Display("COMMANDS",0.5)
+
+def DisplayDICTIONNARY():
+    Display("DICTIONNARY",0.5)
+
 def FindID(name):
     i=1
     while(CountID("ID='"+name+"-"+str(i)+"'")):
         i+=1
     return name+"-"+str(i)
+
+def main(a,b,c=None):
+    print(a,b,c)
+
+InsertCOMMANDS()
