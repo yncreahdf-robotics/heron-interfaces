@@ -30,14 +30,17 @@ def InsertID(askedname):
 
     return askedname
 
-#def InsertCOMMANDS(destination,function,status,source,com=None):
-def InsertCOMMANDS():
+def InsertCOMMANDS(destination,function,source,com=None):
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',
         user='root',password='HeronLeR0B0T')
+        if(com!=None):
+            mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source,ComOrder) VALUES ('ToDo','"+function+"','"+destination+"','waiting','"+source+"','"+com+"');"
+        else:
+            mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source) VALUES ('ToDo','"+function+"','"+destination+"','waiting','"+source+"');"
 
-        mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source,ComOrder) VALUES ('centralTest','DICTIONNARY','nuc-02','waiting','central-01','JustATest');"
-
+        print("sql insert query")
+        print(mySql_insert_query)
         cursor = connection.cursor()
         result = cursor.execute(mySql_insert_query)
         connection.commit()
@@ -121,5 +124,3 @@ def FindID(name):
 
 def main(a,b,c=None):
     print(a,b,c)
-
-InsertCOMMANDS()
