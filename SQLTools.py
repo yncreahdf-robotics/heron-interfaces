@@ -11,7 +11,7 @@ def Clean(table):
 
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',
-        user='root',password='HeronLeR0B0T')
+        user='robot',password='HeronLeR0B0T')
 
         mySql_insert_query = "TRUNCATE TABLE "+table+";"
 
@@ -29,7 +29,7 @@ def CountID(condition):
 
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',
-        user='root',password='HeronLeR0B0T')
+        user='robot',password='HeronLeR0B0T')
 
         sql_select_Query = "select * from AVAILABLE where "+condition+";"
         cursor = connection.cursor()

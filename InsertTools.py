@@ -54,7 +54,7 @@ def InsertDICTIONNARY(FunctionList,ID):
             connection.commit()
             cursor.close()
 
-listFunction=[["function 1","shortDescription1","longDesciption1"],["function 2","shortDescription2","longDesciption2"]]
-ID="centraltest-01"
+#listFunction=[["function 1","shortDescription1","longDesciption1"],["function 2","shortDescription2","longDesciption2"]]
+#ID="centraltest-01"
 
-InsertDICTIONNARY(listFunction,ID)
+#InsertDICTIONNARY(listFunction,ID)

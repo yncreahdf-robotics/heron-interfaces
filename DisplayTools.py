@@ -5,7 +5,7 @@ import time
 
 def DisplayOneTime(table):
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
 
         sql_select_Query = "select * from "+table+";"
         cursor = connection.cursor()
