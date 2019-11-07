@@ -41,7 +41,7 @@ def Main():
     s.connect((Server,port))
 
     # message you send to server
-    message = "Nyrio?"
+    #message = "Nyrio?"
     message= (args.name)
 
 

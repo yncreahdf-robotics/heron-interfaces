@@ -12,12 +12,6 @@ def DisplayOneTime(table):
         cursor.execute(sql_select_Query)
         records = cursor.fetchall()
         #{print("la longueur : ",len(records))
-        phr=""
-        for row in records:
-            for elt in row:
-                phr=phr+str(elt)+"|"
-            print(phr)
-            phr=""
     except AssertionError as error:
         print(error)
         print("Error reading data from MySQL table")
@@ -26,7 +20,15 @@ def DisplayOneTime(table):
         if (connection.is_connected()):
             connection.close()
             cursor.close()
-
+    try:
+        phr=""
+        for row in records:
+            for elt in row:
+                phr=phr+str(elt)+"|"
+            print(phr)
+            phr=""
+    except:
+        print("Error during printing")
 
 def Display(table,temp):#temp en second
 
@@ -44,11 +46,7 @@ def DisplayCOMMANDS():
 def DisplayDICTIONNARY():
     Display("DICTIONNARY",0.5)
 
-def FindID(name):
-    i=1
-    while(CountID("ID='"+name+"-"+str(i)+"'")):
-        i+=1
-    return name+"-"+str(i)
+
 
 def main(a,b,c=None):
     print(a,b,c)

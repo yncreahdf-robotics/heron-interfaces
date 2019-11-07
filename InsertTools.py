@@ -2,6 +2,30 @@ import mysql.connector
 import os
 import time
 
+
+def FindID(name):
+    i=1
+    while(CountID("ID='"+name+"-"+str(i)+"'")):
+        i+=1
+    return name+"-"+str(i)
+
+def CountID(condition):
+
+    try:
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        user='robot',password='HeronLeR0B0T')
+
+        sql_select_Query = "select * from AVAILABLE where "+condition+";"
+        cursor = connection.cursor()
+        cursor.execute(sql_select_Query)
+        records = cursor.fetchall()
+        #{print("la longueur : ",len(records))
+        for row in records:
+            #print(row)
+            pass
+    except :
+        print("Error reading data from MySQL table")
+
 def InsertID(askedname):
     askedname=FindID(askedname)
     try:
@@ -54,7 +78,28 @@ def InsertDICTIONNARY(FunctionList,ID):
             connection.commit()
             cursor.close()
 
-#listFunction=[["function 1","shortDescription1","longDesciption1"],["function 2","shortDescription2","longDesciption2"]]
-#ID="centraltest-01"
+def ChangeCOMMANDS(status,line):
 
-#InsertDICTIONNARY(listFunction,ID)
+    line=str(line)
+    connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
+    sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET STATUS="'
+    sql_select_Query +=status
+    sql_select_Query += '" where LineOrder="'
+    sql_select_Query += line
+    sql_select_Query +='"'
+
+    print(sql_select_Query)
+    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""
+    cmd+=sql_select_Query
+    cmd+="'"
+    print("cmd:",cmd)
+    os.system(cmd)
+    print(sql_select_Query)
+    cursor = connection.cursor()
+    #connection.commit()
+    cursor.execute(sql_select_Query)
+    #records = cursor.fetchall()
+    #{print("la longueur : ",len(records))
+    if (connection.is_connected()):
+            connection.close()
+            cursor.close()
