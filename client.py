@@ -5,12 +5,9 @@ Created on Tue Oct 15 14:11:40 2019
 @author: Quentin
 """
 
-
-# Import socket module
 import socket
-
-
 import argparse
+
 parser = argparse.ArgumentParser()
 parser.add_argument("name")
 args = parser.parse_args()
@@ -23,40 +20,24 @@ def RecovPass():
     f.close()
     return(data)
 
-def TakeName():
-    pass
-
-
 def Main():
 
-    #name=TakeName()
-    Server = '10.224.0.52'
-    passwd=RecovPass()
+    Server = '10.224.0.52' #IP du Server
+    passwd=RecovPass() #Récupération de la Phrase de passe
 
-    # Define the port on which you want to connect
+
     port = 22322
-    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)#Préparation de la socket
+    s.connect((Server,port))#Connection
 
-    # connect to server on local computer
-    s.connect((Server,port))
+    message= (args.name)#nom demandé
+    s.send(message.encode('ascii'))#On envoi la demande
 
-    # message you send to server
-    #message = "Nyrio?"
-    message= (args.name)
+    data = int(s.recv(1024).decode("ascii"))#On récupère le mot de passe demandé
+    s.send(passwd[data:data+24].encode('ascii'))#Et on l'envoi
 
-
-    # message sent to server
-    s.send(message.encode('ascii'))
-
-    # messaga received from server
-    data = int(s.recv(1024).decode("ascii"))
-    print(data)
-
-    s.send(passwd[data:data+24].encode('ascii'))
-    data2 = s.recv(1024).decode('ascii')
-    print(data2)
-
-
+    data2 = s.recv(1024).decode('ascii')#On récupère le message confirmant l'autorisation de communication
+    #print(data2)
     # close the connection
     s.close()
 
