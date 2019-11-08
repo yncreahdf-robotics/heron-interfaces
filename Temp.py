@@ -7,8 +7,11 @@ Created on Tue Oct 15 14:11:40 2019
 
 import os
 
-def alive(host):
-    if os.system("ping -c 1 "+host):
-        return True
-    else:
+def alive(host,it):
+    if(it==0):
         return False
+    else:
+        if os.system("ping -c 1 "+host):
+            return True
+        else:
+            return alive(host,it-1)
