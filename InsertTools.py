@@ -23,8 +23,8 @@ def CountID(name):#retourne le premier indice libre d'un nom. i.e. si heron-1 et
             if(elt[1]==name+"-"+str(it)):
                 Test=True
                 it+=1
-
     return(it)
+
 
 def InsertID(askedname):#Utilise CountID pour trouver l'indice à utiliser. Insert dans AVAILABLE le nom demandé + indice et retourne nom+"-"+ID à utiliser
     askedname=FindID(askedname)
@@ -88,18 +88,14 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
     sql_select_Query += line
     sql_select_Query +='"'
 
-    #print(sql_select_Query)
-    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""
+    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
     cmd+=sql_select_Query
     cmd+="'"
-    #print("cmd:",cmd)
+
     os.system(cmd)
-    #print(sql_select_Query)
+
     cursor = connection.cursor()
-    #connection.commit()
     cursor.execute(sql_select_Query)
-    #records = cursor.fetchall()
-    #{print("la longueur : ",len(records))
     if (connection.is_connected()):
             connection.close()
             cursor.close()
