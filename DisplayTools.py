@@ -3,7 +3,7 @@ import os
 import time
 
 
-def DisplayOneTime(table):
+def DisplayOneTime(table):#Affiche une fois la table
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
 
@@ -30,8 +30,7 @@ def DisplayOneTime(table):
     except:
         print("Error during printing")
 
-def Display(table,temp):#temp en second
-
+def Display(table,temp):#temps en second, utilise DisplayOneTime en boucle et clean la console en
     while(True):
         os.system("clear")
         DisplayOneTime(table)
@@ -45,8 +44,3 @@ def DisplayCOMMANDS():
 
 def DisplayDICTIONNARY():
     Display("DICTIONNARY",0.5)
-
-
-
-def main(a,b,c=None):
-    print(a,b,c)
