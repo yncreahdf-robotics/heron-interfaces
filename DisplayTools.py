@@ -36,11 +36,11 @@ def Display(table,temp):#temps en second, utilise DisplayOneTime en boucle et cl
         DisplayOneTime(table)
         time.sleep(temp)
 
-def DisplayAVAILABLE():
-    Display("AVAILABLE",0.5)
+def DisplayAVAILABLE(temps=0.5):
+    Display("AVAILABLE",temps)
 
 def DisplayCOMMANDS():
-    Display("COMMANDS",0.5)
+    Display("COMMANDS",temps)
 
 def DisplayDICTIONNARY():
-    Display("DICTIONNARY",0.5)
+    Display("DICTIONNARY",temps)
