@@ -2,30 +2,37 @@
 
 from InsertTools import CountID
 import mysql.connector
+import sys
 
-def SELECT(table):
+def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
-    connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
-    sql_select_Query = "select * from "+table+" ;"
-    print(sql_select_Query)
-    cursor = connection.cursor()
-    cursor.execute(sql_select_Query)
-    records = cursor.fetchall()
-    #{print("la longueur : ",len(records))
-    if (connection.is_connected()):
-            connection.close()
-            cursor.close()
-    return records
+    if(condition!=''):
+        condition="where "+condition
 
-def CommandsFor(ID):#Return LineOrder-OrderID-Function-Target-Status-Source-Com
+    try:
+        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
+        sql_select_Query = "SELECT * FROM "+table+" "+condition+";"
+        print(sql_select_Query)
+        #print(sql_select_Query)
+        cursor = connection.cursor()
+        cursor.execute(sql_select_Query)
+        records = cursor.fetchall()
+        #{print("la longueur : ",len(records))
+        if (connection.is_connected()):
+                connection.close()
+                cursor.close()
+        return records
+
+    except:
+        print("Erreure durant un SELECT ,",table)
+        print(sys.exc_info())
+
+def CommandsFor(ID):#Retourne LineOrder-OrderID-Function-Target-Status-Source-Com destiné à L'ID spécifié
     L=[]
-    for elt in SELECT("AVAILABLE"):
-        if(elt[1]==ID):
+    for elt in SELECT("COMMANDS"):
+        if(elt[3]==ID):
             L.append(elt)
     return(L)
 
 def FunctionOrdered(ID):
-    return(SELECT("AVAILABLE","ID='"+ID+"''"))
-
-for i in(CommandsFor("test-0-1")):
-    print(i)
+    return(SELECT("COMMANDS","TARGET='"+ID+"''"))
