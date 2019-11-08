@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 15 14:11:40 2019
-
 @author: Quentin
 """
 
