@@ -4,6 +4,7 @@ from InsertTools import CountID
 import mysql.connector
 import sys
 
+
 def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
     if(condition!=''):
