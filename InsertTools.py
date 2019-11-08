@@ -16,7 +16,7 @@ def CountID(name):#retourne le premier indice libre d'un nom. i.e. si heron-1 et
     cursor.execute(sql_select_Query)
     records = cursor.fetchall()
     Test=True
-    it=0
+    it=1
     while(Test):
         Test=False
         for elt in records:

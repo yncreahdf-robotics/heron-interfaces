@@ -55,7 +55,7 @@ def InitConnection(c,addr,passwd):
             if(data2==passwd[start:start+24]):
                 print("yes")
                 resp=SQLTools.InsertID(nameasked)
-                SQLTools.InsertCOMMANDS(resp,"DICTIONNARY","10.224.0.52")
+                SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","10.224.0.52")
                 c.send("resp".encode('ascii'))
             else:
                 c.send("No!".encode('ascii'))
