@@ -43,7 +43,6 @@ def InitConnection(c,addr,passwd):
                 c.send("resp".encode('ascii'))
             else:
                 c.send("No!".encode('ascii'))
-
     c.close()
 
 
