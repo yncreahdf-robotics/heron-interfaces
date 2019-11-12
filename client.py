@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
 """
 @author: Quentin
 """
@@ -35,8 +36,7 @@ def Main():
 
     data2 = s.recv(1024).decode('ascii')#On récupère le message confirmant l'autorisation de communication
     #print(data2)
-    # close the connection
-    s.close()
+    s.close()#Fermeture de la connection
 
 if __name__ == '__main__':
     Main()
