@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
 
 from InsertTools import CountID
 import mysql.connector
 import sys
-
 
 def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
