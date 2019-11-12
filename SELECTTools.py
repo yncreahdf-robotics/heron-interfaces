@@ -11,7 +11,7 @@ def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat
         condition="where "+condition
 
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
+        connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
         sql_select_Query = "SELECT * FROM "+table+" "+condition+";"
         print(sql_select_Query)
         #print(sql_select_Query)

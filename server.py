@@ -33,9 +33,11 @@ def InitConnection(c,addr,passwd):
                 break
 
             nameasked=data.decode('ascii')
+            c.send(str(start).encode('ascii'))
             data2=c.recv(1024).decode("ascii")
 
             print(data2)
+            print("2")
             if(data2==passwd[start:start+24]):
                 print("yes")
                 resp=SQLTools.InsertID(nameasked)

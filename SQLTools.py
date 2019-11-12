@@ -10,7 +10,7 @@ from InsertTools import *
 def Clean(table):#Réinitialise une table
 
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
         user='robot',password='HeronLeR0B0T')#Connection
 
         mySql_insert_query = "TRUNCATE TABLE "+table+";"#Command SQL Nescessaire pour réinitialiser une table

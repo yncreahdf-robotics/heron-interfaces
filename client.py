@@ -30,7 +30,6 @@ def Main():
 
     message= (args.name)#nom demandé
     s.send(message.encode('ascii'))#On envoi la demande
-
     data = int(s.recv(1024).decode("ascii"))#On récupère le mot de passe demandé
     s.send(passwd[data:data+24].encode('ascii'))#Et on l'envoi
 
