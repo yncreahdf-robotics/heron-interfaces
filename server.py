@@ -6,7 +6,7 @@ Editor : Quentin
 
 import socket
 import SQLTools
-from _thread import *
+from thread import *
 import threading
 import random
 
