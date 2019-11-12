@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
 """
 Editor : Quentin
 """
@@ -22,9 +23,10 @@ def RecovPass():#Récupère la phrase de passe
 
 # thread fuction
 def InitConnection(c,addr,passwd):
+
     while True:
             start=random.randint(0,len(passwd)-100)#On choisi le mot de passe
-            # data received from client
+
             data = c.recv(1024)#On reçoit l'ID demandé
             if not data:#Si l'ID est vide
                 print('Bye')
@@ -45,17 +47,20 @@ def InitConnection(c,addr,passwd):
                 c.send("resp".encode('ascii'))
             else:
                 c.send("No!".encode('ascii'))
-    c.close()
+            c.close()
 
 
 def Main():
     host = ""
+    port = 22322
 
     passwd=RecovPass()
-    port = 22322
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
     s.bind((host, port))
     print("socket binded to port", port)
+
     s.listen(5)
     print("socket is listening")
 
@@ -65,7 +70,6 @@ def Main():
         # lock acquired by client
         print_lock.acquire()
         print('Connected to :', addr[0], ':', addr[1]) #On affiche l'IP du client
-        # Start a new thread and return its identifier
         start_new_thread(InitConnection, (c,addr,passwd))
 
 
