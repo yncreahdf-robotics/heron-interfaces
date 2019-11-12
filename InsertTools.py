@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 import mysql.connector
 import os
 import time
@@ -15,18 +18,21 @@ def CountID(name):#retourne le premier indice libre d'un nom. i.e. si heron-1 et
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     records = cursor.fetchall()
+
+    #On recherche le premier index libre pour cet ID
     Test=True
-    it=1
-    while(Test):
-        Test=False
+    it=1 #Il est au minimum 1
+    while(Test):#Tant qu'il est nescessaire de continuer
+        Test=False #On suppose avoir trouvé le premier index libre
         for elt in records:
-            if(elt[1]==name+"-"+str(it)):
-                Test=True
-                it+=1
+            if(elt[1]==name+"-"+str(it)): #Si l'index est utilisé
+                Test=True #Alors on doit parcourir une nouvelle fois la boucle
+                it+=1 #Et on incrémente donc l'indice
     return(it)
 
 
 def InsertID(askedname):#Utilise CountID pour trouver l'indice à utiliser. Insert dans AVAILABLE le nom demandé + indice et retourne nom+"-"+ID à utiliser
+
     askedname=FindID(askedname)
     try:
         connection = mysql.connector.connect(host='localhost',database='heronDatabase',
@@ -55,8 +61,6 @@ def InsertCOMMANDS(ref,destination,function,source,com=None):#Insert dans COMMAN
         else:
             mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source) VALUES ('"+ref+"','"+function+"','"+destination+"','waiting','"+source+"');"
 
-        #print("sql insert query")
-        #print(mySql_insert_query)
         cursor = connection.cursor()
         result = cursor.execute(mySql_insert_query)
         connection.commit()
