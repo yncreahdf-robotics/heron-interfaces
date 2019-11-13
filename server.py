@@ -35,6 +35,9 @@ def InitConnection(c,addr,passwd):
                 break
 
             nameasked=data.decode('ascii')
+
+            """---Ici la version utilisée avec couche d'authentification"""
+
             c.send(str(start).encode('ascii'))
             data2=c.recv(1024).decode("ascii")
 
@@ -49,6 +52,10 @@ def InitConnection(c,addr,passwd):
                 c.send("No!".encode('ascii'))
             c.close()
 
+            """---------Sans cette couche-----------------------"""
+            #resp=SQLTools.InsertID(nameasked)
+            #SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","10.224.0.52")
+            #c.send("resp".encode('ascii'))
 
 def Main():
     host = ""
