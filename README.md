@@ -43,30 +43,49 @@ Nous allons avoir besoin des tables suivantes :
 | ------ | ------ | ------ | ------ | ------ | ------ |
 
 | **availableLine** | int(11)  | NO   | PRI | NULL    | auto_increment |
+
 | **ID**            | tinytext | NO  |     | NULL    |                |
+
 | **Status**        | tinytext | NO   |     | NULL    |                |
+
 | **ComAvailable**  | tinytext | YES  |     | NULL    |                |
+
 
 **Table COMMANDS**
 
 | Champs         | Type     | Null | Key | Default | Extra |
+
 | ---------------- | ---------- | ------ | ----- | --------- | ---------------- |
+
 | **LineOrder** | int(10)  | NO   | PRI | NULL    | auto_increment |
+
 | **OrderID**            | tinytext | NO  |     | NULL    |                |
+
 | **Function**        | tinytext | NO   |     | NULL    |                |
+
 | **Target**  | tinytext | NO  |     | NULL    |                |
+
 | **Status**  | tinytext | NO  |     | NULL    |                |
+
 | **Source**  | tinytext | NO  |     | NULL    |                |
+
 | **ComOrder**  | text | YES  |     | NULL    |                |
+
 
 **Table DICTIONNARY**
 
 | Champs         | Type     | Null | Key | Default | Extra          |
+
 | ---------------- | ---------- | ------ | ----- | --------- | ---------------- |
+
 | **DictionnaryLine** | int(11)  | NO   | PRI | NULL    | auto_increment |
+
 | **ID**            | tinytext | NO  |     | NULL    |                |
+
 | **Function**        | tinytext | NO   |     | NULL    |                |
+
 | **ShortDescription**  | tinytext | NO  |     | NULL    |                |
+
 | **LongDescription**  | text | YES  |     | NULL    |                |
 
 Les commands pour mettre en place ces tables sont :
