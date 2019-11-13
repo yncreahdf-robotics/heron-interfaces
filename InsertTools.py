@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
+"""
+@author: Quentin
+"""
 
 import mysql.connector
 import os
@@ -84,6 +87,7 @@ def InsertDICTIONNARY(FunctionList,ID):#Liste de function [Function,ShortDesc,Lo
 
 def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire line
 
+    #Pour des raisons encore obscures, si les INSERT fonctionnent, les UPDATE eux nescessitent de passer par la console
     line=str(line)
     connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
     sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET STATUS="'
@@ -96,7 +100,7 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
     cmd+=sql_select_Query
     cmd+="'"
 
-    os.system(cmd)
+    os.system(cmd)#On execute la commande dans la console
 
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
