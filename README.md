@@ -38,8 +38,8 @@ mysql -u utilisateur -password 'votreMotDePasse' -e 'CREATE DATABASE heronDataba
 Nous allons avoir besoin des tables suivantes :
 
 **Table AVAILABLE**
-| Champs         | Type     | Null | Key | Default | Extra          |
-|----------------|----------|------|-----|---------|----------------|
+| Champs         | Type     | Null | Key | Default | Extra
+| ------ | ------ | ------ | ------ |------ |------ |
 | **availableLine** | int(11)  | NO   | PRI | NULL    | auto_increment |
 | **ID**            | tinytext | NO  |     | NULL    |                |
 | **Status**        | tinytext | NO   |     | NULL    |                |
