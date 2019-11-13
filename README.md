@@ -39,7 +39,7 @@ Nous allons avoir besoin des tables suivantes :
 
 **Table AVAILABLE**
 | Champs         | Type     | Null | Key | Default | Extra          |
-|---------------|:--------:|:----:|:----:|:------:|:---------------:|
+|---------------|--------|----|----|------|---------------|
 | **availableLine** | int(11)  | NO   | PRI | NULL    | auto_increment |
 | **ID**            | tinytext | NO  |     | NULL    |                |
 | **Status**        | tinytext | NO   |     | NULL    |                |
@@ -47,7 +47,7 @@ Nous allons avoir besoin des tables suivantes :
 
 **Table COMMANDS**
 | Champs         | Type     | Null | Key | Default | Extra          |
-|---------------|:--------:|:----:|:----:|:------:|:---------------:|
+|---------------|--------|----|----|------|---------------|
 | **LineOrder** | int(10)  | NO   | PRI | NULL    | auto_increment |
 | **OrderID**            | tinytext | NO  |     | NULL    |                |
 | **Function**        | tinytext | NO   |     | NULL    |                |
@@ -58,7 +58,7 @@ Nous allons avoir besoin des tables suivantes :
 
 **Table DICTIONNARY**
 | Champs         | Type     | Null | Key | Default | Extra          |
-|---------------|:--------:|:----:|:----:|:------:|:---------------:|
+|---------------|--------|----|----|------|---------------|
 | **DictionnaryLine** | int(11)  | NO   | PRI | NULL    | auto_increment |
 | **ID**            | tinytext | NO  |     | NULL    |                |
 | **Function**        | tinytext | NO   |     | NULL    |                |
