@@ -13,7 +13,7 @@ args = parser.parse_args()
 print(args.name)
 
 
-def RecovPass():
+def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et stock la chaîne de caractère dans une variable (retournée)
     f= open("../Guess.txt","r")
     data=f.read()
     f.close()
