@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
+"""
+@author: Quentin
+"""
 
 import mysql.connector
 import os
@@ -33,10 +36,10 @@ def DisplayOneTime(table):#Affiche une fois la table
     except:
         print("Error during printing")
 
-def Display(table,temp):#temps en second, utilise DisplayOneTime en boucle et clean la console en
+def Display(table,temp):#Affiche la table en boucle et actualise par défault toutes les 0.5 secondes (la période de rafraîchissement peut-être spécifiée en paramètre)
     while(True):
-        os.system("clear")
-        DisplayOneTime(table)
+        os.system("clear")#On clear la console
+        DisplayOneTime(table)#Affichage console
         time.sleep(temp)
 
 def DisplayAVAILABLE(temps=0.5):
