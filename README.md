@@ -7,7 +7,7 @@ On peut faire une petite introduction ici
 ### **Côté Serveur**
 #### *Prérequis*
 
-L'ensemble des programmes ont été rédigé en supposant que l'IP du server est 10.224.0.53 et que son port 22322 était libre.
+L'ensemble des programmes a été rédigé en supposant que l'IP du server est 10.224.0.53 et que son port 22322 était libre.
 Les scripts devront être adapté si ces conditions ne sont pas vérifiées.
 
 | Prérequis | Source |
