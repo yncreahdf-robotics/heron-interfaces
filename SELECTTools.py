@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
+"""
+@author: Quentin
+"""
 
 from InsertTools import CountID
 import mysql.connector
