@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-
+"""
+@author: Quentin
+"""
 
 import sys
 import os
@@ -14,11 +16,6 @@ def PingIP(IP):
     else:
         return False
 
-#listeIP=["127.0.0.1","10.224.0.51","10.224.0.52","8.8.8.8"]
-
-#for IP in listeIP:
-#    print(IP,PingIP(IP))
-
 class NetWork:
 
     listeIP=[]
@@ -26,37 +23,21 @@ class NetWork:
     def __init__(self):
         pass
 
-    def addIP(self,IP):
+    def addIP(self,IP):#Ajoute une IP à la liste
         self.listeIP.append([IP,0])
 
-    def Scan(self):
+    def Scan(self):#Teste un PING unique pour chaque adresse
         for ip in range(0,len(self.listeIP)):
             IP=self.listeIP[ip][0]
             output = subprocess.check_output("ping -c1 "+IP+"> /dev/null && echo 'Connected' || echo 'Disconnected'", shell=True)
-            if("Connected" in output):
+            if("Connected" in output):#Si l'IP répond, on réinitialise le nombre de "Non-Réponses"
                 self.listeIP[ip][1]=0
             else:
-                self.listeIP[ip][1]+=1
+                self.listeIP[ip][1]+=1#Sinon on incrémente
 
-    def Disconnect(self,it=10):
+    def Disconnect(self,it=10):#On parcour la liste des Non-Réponse, et on peux spécifié la valeur max tolérée
         ListeDisconnected=[]
         for ip in range(0,len(self.listeIP)):
-            if(self.listeIP[1]>=it):
-                ListeDisconnected.append(self.listeIP[ip])
+            if(self.listeIP[1]>=it):#Si la valeur max est atteinte
+                ListeDisconnected.append(self.listeIP[ip])#On ajoute l'IP à la liste d'IP déconnectée qu'on fournira
         return ListeDisconnected
-
-listeIP=["10.224.0.50","10.224.0.51","10.224.0.52"]
-
-net=NetWork()
-
-for ip in listeIP:
-    net.addIP(ip)
-
-try:
-    while True:
-        net.Scan()
-        print("------")
-        for ip in net.Disconnect():
-            print(ip)
-except:
-    pass
