@@ -15,6 +15,7 @@ L'ensemble des programmes a été rédigé en supposant que :
 - L'IP du server est 10.224.0.53
 - Son port 22322 est libre (connection TCP)
 
+
 * Les scripts devront être adaptés si ces conditions ne sont pas vérifiées.
 
 | Prérequis | Source |
@@ -126,13 +127,13 @@ USE heronDatabase;
 ### **Utilisation de notre client**
 #### *Prérequis*
 
-Assuré vous d'avoir placé dans un dossier, à sa racine, ce repo et le fichier Guess.txt permettant d'initialiser la connection.
+Assurez vous d'avoir placé dans un dossier, à sa racine, ce repo et le fichier Guess.txt permettant d'initialiser la connexion.
 
 ## Utilisation
 ---------------------------------------------------------------------------------------------------
 ### **Côté Serveur**
 Dans un même dossier, placer le fichier Guess.txt contenant la phrase de passe ainsi que ce repo.
-Executé le programme server.py
+Executez le programme server.py
 Executer donc :
 ```sh
 python server.py
@@ -146,8 +147,8 @@ Donner en argument l'ID souhaité.
 ```sh
 python client.py LeNomDeMonSuperRobot
 ```
-Vous pouvez récupérer grâce à notre client l'ID exacte qui serat attribué à votre robot.
-En effet, chaque ID demandé est toujours accepté mais est également suivit d'un index.
+Vous pouvez récupérer grâce à notre client l'ID exacte qui sera attribuée à votre robot.
+En effet, chaque ID demandée est toujours acceptée mais est également suivie d'un index.
 C'est à dire que python client.py NomRobot donnera pour ID à votre robot un id de la forme :
 NomRobot-xx
 Avec xx un entier supérieur ou égale à 1.
