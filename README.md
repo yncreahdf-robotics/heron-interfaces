@@ -14,9 +14,8 @@
 L'ensemble des programmes a été rédigé en supposant que :
 - L'IP du server est 10.224.0.53
 - Son port 22322 est libre (connection TCP)
+- Les scripts devront être adaptés si ces conditions ne sont pas vérifiées.
 
-
-* Les scripts devront être adaptés si ces conditions ne sont pas vérifiées.
 
 | Prérequis | Source |
 | ------ | ------ |
