@@ -1,14 +1,17 @@
 # Programme d'interface et du serveur du projet Heron
 
-On peut faire une petite introduction ici
-
+![alt text](RessourceReadMe/Heron 1.png)
+![alt text](RessourceReadMe/Heron 2.png)
 ## **Installation**
 ---------------------------------------------------------------------------------------------------
 ### **Côté Serveur**
 #### *Prérequis*
 
-L'ensemble des programmes a été rédigé en supposant que l'IP du server est 10.224.0.53 et que son port 22322 était libre.
-Les scripts devront être adapté si ces conditions ne sont pas vérifiées.
+L'ensemble des programmes a été rédigé en supposant que :
+- L'IP du server est 10.224.0.53
+- Son port 22322 est libre (connection TCP)
+
+* Les scripts devront être adaptés si ces conditions ne sont pas vérifiées.
 
 | Prérequis | Source |
 | ------ | ------ |
