@@ -1,4 +1,4 @@
-#Définir un port USB dans ubuntu #
+# Définir un port USB dans ubuntu #
 
 Pour ce qui est propre au robot, copier le fichier “10-heron.rules” situé dans FixationPortsUSB dans le dossier de ubuntu “/lib/udev/rules.d/”, puis redémarrer le système 
 
