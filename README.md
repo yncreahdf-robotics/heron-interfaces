@@ -1,8 +1,8 @@
 # Programme d'interface et du serveur du projet Heron
 
-![alt text](RessourceReadMe/Heron 1.png)
+![alt text](RessourceReadMe/Heron%201.png)
 
-![alt text](RessourceReadMe/Heron 2.png)
+![alt text](RessourceReadMe/Heron2.png)
 ## **Installation**
 ---------------------------------------------------------------------------------------------------
 ### **Côté Serveur**
