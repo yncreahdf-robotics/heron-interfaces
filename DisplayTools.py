@@ -27,6 +27,7 @@ def DisplayOneTime(table):#Affiche une fois la table
             connection.close()
             cursor.close()
     try:
+        print("------",table,"-------")
         phr=""
         for row in records:
             for elt in row:
@@ -45,8 +46,8 @@ def Display(table,temp):#Affiche la table en boucle et actualise par défault to
 def DisplayAVAILABLE(temps=0.5):
     Display("AVAILABLE",temps)
 
-def DisplayCOMMANDS():
+def DisplayCOMMANDS(temps=0.5):
     Display("COMMANDS",temps)
 
-def DisplayDICTIONNARY():
+def DisplayDICTIONNARY(temps=0.5):
     Display("DICTIONNARY",temps)
