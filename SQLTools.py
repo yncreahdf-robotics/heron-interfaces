@@ -32,8 +32,6 @@ def Clean(table):#Réinitialise une table
             connection.close()
             cursor.close()#Fermeture de la connexion
 
-    return len(records)
-
 def CleanAll():
     L=["AVAILABLE","COMMANDS","DICTIONNARY"]
     for table in L:
