@@ -35,8 +35,9 @@ def Main():
     s.send(passwd[data:data+24].encode('ascii'))#Et on l'envoi
 
     data2 = s.recv(1024).decode('ascii')#On récupère le message confirmant l'autorisation de communication
-    #print(data2)
+    print(data2)
     s.close()#Fermeture de la connection
+    return data2
 
 if __name__ == '__main__':
     Main()
