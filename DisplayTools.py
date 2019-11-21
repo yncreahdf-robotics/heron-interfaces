@@ -11,7 +11,7 @@ import time
 
 def DisplayOneTime(table):#Affiche une fois la table
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='robot',password='HeronLeR0B0T')
+        connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
 
         sql_select_Query = "select * from "+table+";"
         cursor = connection.cursor()

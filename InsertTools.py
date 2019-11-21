@@ -15,7 +15,7 @@ def FindID(name):
 
 def CountID(name):#retourne le premier indice libre d'un nom. i.e. si heron-1 et heron-2 sont déjà utilisé CountID("heron") retourne 3
 
-    connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
     user='robot',password='HeronLeR0B0T')
     sql_select_Query = "select * from AVAILABLE;"
     cursor = connection.cursor()
@@ -38,8 +38,8 @@ def InsertID(askedname):#Utilise CountID pour trouver l'indice à utiliser. Inse
 
     askedname=FindID(askedname)
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
-        user='root',password='HeronLeR0B0T')
+        connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
+        user='robot',password='HeronLeR0B0T')
 
         mySql_insert_query = """INSERT INTO AVAILABLE (Id, Status, ComAvailable)
                                VALUES
@@ -57,7 +57,7 @@ def InsertID(askedname):#Utilise CountID pour trouver l'indice à utiliser. Inse
 
 def InsertCOMMANDS(ref,destination,function,source,com=None):#Insert dans COMMANDS (OrderID,Target,Function,Source,ComOrder). ComOrder est facultatif, la commands serat automatiquement en wainting
     try:
-        connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+        connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
         user='robot',password='HeronLeR0B0T')
         if(com!=None):
             mySql_insert_query = "INSERT INTO COMMANDS (OrderId, Function,Target,Status,Source,ComOrder) VALUES ('"+ref+"','"+function+"','"+destination+"','waiting','"+source+"','"+com+"');"
@@ -89,7 +89,7 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
 
     #Pour des raisons encore obscures, si les INSERT fonctionnent, les UPDATE eux nescessitent de passer par la console
     line=str(line)
-    connection = mysql.connector.connect(host='localhost',database='heronDatabase',user='root',password='HeronLeR0B0T')
+    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='root',password='HeronLeR0B0T')
     sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET STATUS="'
     sql_select_Query +=status
     sql_select_Query += '" where LineOrder="'
