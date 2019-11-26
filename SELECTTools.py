@@ -5,8 +5,13 @@
 """
 
 from InsertTools import CountID
+from InsertTools import ChangeCOMMANDS
+from InsertTools import InsertDICTIONNARY
 import mysql.connector
 import sys
+
+
+Function=[['DICTIONNARY','DICTIONNARY',''],['PRINT','PRINT(str)','PRINT ON DEVICE'],['TEMPERATURE','TEMPERATURE','Return in Comm the TEMPERATURE']]
 
 def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
@@ -16,7 +21,7 @@ def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat
     try:
         connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
         sql_select_Query = "SELECT * FROM "+table+" "+condition+";"
-        print(sql_select_Query)
+        #print(sql_select_Query)
         #print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
@@ -40,3 +45,12 @@ def CommandsFor(ID):#Retourne LineOrder-OrderID-Function-Target-Status-Source-Co
 
 def FunctionOrdered(ID):
     return(SELECT("COMMANDS","TARGET='"+ID+"''"))
+
+#InsertDICTIONNARY(FunctionList,ID)#Liste de function [Function,ShortDesc,LongDesc]
+
+#for elt in CommandsFor('raspberryMegaTest-1'):
+#    print(elt[0],elt[2].encode("ascii"))
+#    if(('DICTIONNARY' in elt[2].encode('ascii') and (elt[4].encode('ascii')=='waiting'))):
+#        InsertDICTIONNARY(Function,'raspberryMegaTest-1')
+#        ChangeCOMMANDS('accepted',elt[0])
+    #ChangeCOMMANDS('Done',elt[0])
