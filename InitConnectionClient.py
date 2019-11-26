@@ -34,4 +34,4 @@ def InitConnection(name):
     s.close()#Fermeture de la connection
     return data2
 
-print(InitConnection("TestNewProgram"))
+#print(InitConnection("TestNewProgram"))
