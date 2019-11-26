@@ -10,7 +10,7 @@ import SELECTTools
 import InsertTools
 import time
 
-ListFunction=[['DICTIONNARY','DICTIONNARY',''],['PRINT','PRINT(str)','PRINT ON DEVICE'],['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est']]
+ListFunction=[['DICTIONNARY','DICTIONNARY',''],['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est']]
 
 def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et stock la chaîne de caractère dans une variable (retournée)
     f= open("../Guess.txt","r")
@@ -61,5 +61,9 @@ while(time.time()-now<10):
                     if('TEMPERATURE' in Function):
                         print("TEMPERATURE")
                         InsertTools.ChangeCOMMANDS("accepted",LineOrder)
-                        InsertTools.UpdateCom('Temp'+str(int(Function[-2])),LineOrder)
+                        zone=str(int(Function[-2]))
+                        temperatureValue='tempOf'+zone
+                        #For jetson
+                        #temperatureValue=subprocess.check_output("cat /sys/devices/virtual/thermal/thermal_zone"+zone+"/temp", shell=True)
+                        InsertTools.UpdateCom(temperatureValue,LineOrder)
                         InsertTools.ChangeCOMMANDS("done",LineOrder)
