@@ -105,7 +105,7 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
     sql_select_Query += line
     sql_select_Query +='"'
 
-    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
+    cmd="""mysql -u 'robot' -h '10.224.0.52' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
     cmd+=sql_select_Query
     cmd+="'"
 
@@ -128,7 +128,7 @@ def UpdateCom(com,line):#Change le status de la ligne de clé primaire line
     sql_select_Query += line
     sql_select_Query +='"'
 
-    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
+    cmd="""mysql -u 'robot' -h '10.224.0.52' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
     cmd+=sql_select_Query
     cmd+="'"
 
