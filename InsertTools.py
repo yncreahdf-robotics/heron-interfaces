@@ -77,7 +77,7 @@ def InsertCOMMANDS(ref,destination,function,source,com=None):#Insert dans COMMAN
 def InsertDICTIONNARY(FunctionList,ID):#Liste de function [Function,ShortDesc,LongDesc]
     for elt in FunctionList:
             function,shortDescription,longDescription=elt[0],elt[1],elt[2]
-            connection = mysql.connector.connect(host='localhost',database='heronDatabase',
+            connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
             user='robot',password='HeronLeR0B0T')
             mySql_insert_query = "INSERT INTO DICTIONNARY (ID,Function, ShortDescription,LongDescription) VALUES ('"+ID+"','"+function+"','"+shortDescription+"','"+longDescription+"');"
             cursor = connection.cursor()
@@ -89,7 +89,7 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
 
     #Pour des raisons encore obscures, si les INSERT fonctionnent, les UPDATE eux nescessitent de passer par la console
     line=str(line)
-    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='root',password='HeronLeR0B0T')
+    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
     sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET STATUS="'
     sql_select_Query +=status
     sql_select_Query += '" where LineOrder="'
