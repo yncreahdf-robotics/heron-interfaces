@@ -75,6 +75,15 @@ def InsertCOMMANDS(ref,destination,function,source,com=None):#Insert dans COMMAN
     return True
 
 def InsertDICTIONNARY(FunctionList,ID):#Liste de function [Function,ShortDesc,LongDesc]
+
+    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
+    user='robot',password='HeronLeR0B0T')
+    mySql_insert_query = "DELETE FROM DICTIONNARY where ID='"+ID+"';"
+    cursor = connection.cursor()
+    result = cursor.execute(mySql_insert_query)
+    connection.commit()
+    cursor.close()
+
     for elt in FunctionList:
             function,shortDescription,longDescription=elt[0],elt[1],elt[2]
             connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',
@@ -92,6 +101,29 @@ def ChangeCOMMANDS(status,line):#Change le status de la ligne de clé primaire l
     connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
     sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET STATUS="'
     sql_select_Query +=status
+    sql_select_Query += '" where LineOrder="'
+    sql_select_Query += line
+    sql_select_Query +='"'
+
+    cmd="""mysql -u 'robot' --password='HeronLeR0B0T' -e '"""#Execute the UPDATE with a command line in a terminale
+    cmd+=sql_select_Query
+    cmd+="'"
+
+    os.system(cmd)#On execute la commande dans la console
+
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    if (connection.is_connected()):
+            connection.close()
+            cursor.close()
+
+def UpdateCom(com,line):#Change le status de la ligne de clé primaire line
+
+    #Pour des raisons encore obscures, si les INSERT fonctionnent, les UPDATE eux nescessitent de passer par la console
+    line=str(line)
+    connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
+    sql_select_Query = 'UPDATE heronDatabase.COMMANDS SET ComOrder="'
+    sql_select_Query +=com
     sql_select_Query += '" where LineOrder="'
     sql_select_Query += line
     sql_select_Query +='"'
