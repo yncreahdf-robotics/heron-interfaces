@@ -4,4 +4,4 @@ SUBSYSTEMS=="usb", ATTRS{product}=="USB Roboclaw 2x7A", SYMLINK+="winch"
 KERNELS=="1-2.3.1", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="roboteq_back"
 KERNELS=="1-2.4.4", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="roboteq_front"
 SUBSYSTEMS=="usb", ATTRS{manufacturer}=="Silicon Labs", ATTRS{serial}=="0001", SYMLINK+="lidar"
-
+SUBSYSTEMS=="usb", DRIVERS=="ch341", ATTRS{bInterfaceClass}=="ff", SYMLINK+="usbcan"  
