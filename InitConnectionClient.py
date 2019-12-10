@@ -9,6 +9,7 @@ import SQLTools
 import SELECTTools
 import InsertTools
 import time
+import subprocess
 
 ListFunction=[['DICTIONNARY','DICTIONNARY',''],['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est']]
 
