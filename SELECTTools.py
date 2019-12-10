@@ -11,7 +11,7 @@ import mysql.connector
 import sys
 
 
-Function=[['DICTIONNARY','DICTIONNARY',''],['PRINT','PRINT(str)','PRINT ON DEVICE'],['TEMPERATURE','TEMPERATURE','Return in Comm the TEMPERATURE']]
+
 
 def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
