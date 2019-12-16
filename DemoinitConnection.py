@@ -4,21 +4,46 @@
 @author: Quentin
 """
 
+
+
 import socket
 import SQLTools
 import SELECTTools
 import InsertTools
 import time
 import subprocess
+import rospy
+
+import PubForHeron
+
+from geometry_msgs.msg import Twist
+from std_msgs.msg import Bool
+from heron.msg import Motion
+
+
+HERON_ID='Heron01'
+
+rospy.init_node('centralheron', anonymous=True)
+velocity_publisher = rospy.Publisher('/'+HERON_ID+'/cmd_vel', Twist, queue_size=10)
+zone_publisher = rospy.Publisher('/'+HERON_ID+'/move_to', Motion, queue_size=10)
+rospy.sleep(1)
+
+
+
 import PubForHeron
 
 import rospy
 from std_msgs.msg import String
 
+HERON_ID='Heron01'
+
 
 ListFunction=[['DICTIONNARY','DICTIONNARY',''],
 ['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est'],
-['CIRCLE','CIRCLE','']]
+['CIRCLE','CIRCLE',''],['ZONE','ZONE(ZoneName)','Send Robot to the zone named "BANC", "BASE", "STOCK"']]
+
+
+
 
 def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et stock la chaîne de caractère dans une variable (retournée)
     f= open("../Guess.txt","r")
@@ -52,8 +77,7 @@ print("----------------------")
 #InsertTools.InsertCOMMANDS('fortheTest',ID,'TEMPERATURE(4)','fortheTest',com=None)
 
 now=time.time()
-while(time.time()-now<1000):
-    #print(time.time()-now)
+while(time.time()-now<300):
     commands=SELECTTools.CommandsFor(ID)
     for elt in commands:
         LineOrder,OrderID,Function,Target,Status,Source,ComOrder=elt[0],elt[1],elt[2],elt[3],elt[4],elt[5],elt[6]
@@ -84,5 +108,24 @@ while(time.time()-now<1000):
                     if('CIRCLE' in Function):
                         print("TEMPERATURE")
                         InsertTools.ChangeCOMMANDS("accepted",LineOrder)
-                        PubForHeron.Circle()
+                        PubForHeron.Circle(velocity_publisher)
+                        InsertTools.ChangeCOMMANDS("done",LineOrder)
+
+                    if('ZONE' in Function):
+
+                        print("Zone")
+
+                        if('BANC' in Function):
+                            print("Banc")
+                            position_x,position_y,orientation_z,orientation_w,plate_height=5.6612,3.9858,-0.9996,0.02776,0.79
+                        if('BASE' in Function):
+                            position_x,position_y,orientation_z,orientation_w,plate_height=4.55638,5.115,0.0839,0.0839,0.01
+                            print("Base")
+                        if('STOCK' in Function):
+                            position_x,position_y,orientation_z,orientation_w,plate_height=5.8376,5.50369,0.73822,0.674549,0.787
+                            print("Stock")
+
+                        InsertTools.ChangeCOMMANDS("accepted",LineOrder)
+                        PubForHeron.Zone(position_x,position_y,orientation_z,orientation_w,plate_height,zone_publisher)
+
                         InsertTools.ChangeCOMMANDS("done",LineOrder)
