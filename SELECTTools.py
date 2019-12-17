@@ -45,12 +45,3 @@ def CommandsFor(ID):#Retourne LineOrder-OrderID-Function-Target-Status-Source-Co
 
 def FunctionOrdered(ID):
     return(SELECT("COMMANDS","TARGET='"+ID+"''"))
-
-#InsertDICTIONNARY(FunctionList,ID)#Liste de function [Function,ShortDesc,LongDesc]
-
-#for elt in CommandsFor('raspberryMegaTest-1'):
-#    print(elt[0],elt[2].encode("ascii"))
-#    if(('DICTIONNARY' in elt[2].encode('ascii') and (elt[4].encode('ascii')=='waiting'))):
-#        InsertDICTIONNARY(Function,'raspberryMegaTest-1')
-#        ChangeCOMMANDS('accepted',elt[0])
-    #ChangeCOMMANDS('Done',elt[0])
