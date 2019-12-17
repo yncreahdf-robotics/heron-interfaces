@@ -127,5 +127,4 @@ while(time.time()-now<300):
 
                         InsertTools.ChangeCOMMANDS("accepted",LineOrder)
                         PubForHeron.Zone(position_x,position_y,orientation_z,orientation_w,plate_height,zone_publisher)
-
                         InsertTools.ChangeCOMMANDS("done",LineOrder)
