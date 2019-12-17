@@ -2,6 +2,7 @@
 
 import rospy
 import time
+import subprocess
 
 #from std_msgs.msg import String
 
@@ -53,5 +54,6 @@ def Zone(position_x,position_y,orientation_z,orientation_w,plate_height,zone_pub
 
     msg_Zone=Motion()
     msg_Zone.position_x,msg_Zone.position_y,msg_Zone.orientation_z,msg_Zone.orientation_w,msg_Zone.plate_height=position_x,position_y,orientation_z,orientation_w,plate_height
-    print(msg_Zone)
     zone_publisher.publish(msg_Zone)
+    output=subprocess.check_output("rostopic echo /Heron01/goal_reached -n 1",shell=True)
+    print(type(output))
