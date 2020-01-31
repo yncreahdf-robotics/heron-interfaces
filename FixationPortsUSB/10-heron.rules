@@ -1,5 +1,5 @@
 SUBSYSTEMS=="usb", ATTRS{manufacturer}=="Silicon Labs", ATTRS{serial}=="LPMSUA2000247", SYMLINK+="imu"
-SUBSYSTEMS=="usb", ATTRS{serial}=="A9K1FQN3", SYMLINK+="battery"
+SUBSYSTEMS=="usb", ATTRS{serial}=="A9K1FQN3", SYMLINK+="coulomb_counter_cc75"
 SUBSYSTEMS=="usb", ATTRS{product}=="USB Roboclaw 2x7A", SYMLINK+="winch"
 KERNELS=="1-2.3.1", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="roboteq_back"
 KERNELS=="1-2.4.4", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="roboteq_front"

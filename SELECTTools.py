@@ -5,8 +5,13 @@
 """
 
 from InsertTools import CountID
+from InsertTools import ChangeCOMMANDS
+from InsertTools import InsertDICTIONNARY
 import mysql.connector
 import sys
+
+
+
 
 def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat une requete sql SELECT * FROM table;
 
@@ -16,7 +21,7 @@ def SELECT(table,condition=""):#Retourne sous la forme d'une liste les résultat
     try:
         connection = mysql.connector.connect(host='10.224.0.52',database='heronDatabase',user='robot',password='HeronLeR0B0T')
         sql_select_Query = "SELECT * FROM "+table+" "+condition+";"
-        print(sql_select_Query)
+        #print(sql_select_Query)
         #print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
