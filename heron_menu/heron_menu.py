@@ -13,7 +13,7 @@ def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
     consigne = "Use arrows to navigate and then ENTER :"
-    stdscr.addstr(h-35, w//2 - len(consigne)//2,consigne)
+    stdscr.addstr(h//2 - len(menu)//2 - 2, w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):
         x = w//2 - len(row)//2
         y = h//2 - len(menu)//2 + idx
