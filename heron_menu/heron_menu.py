@@ -37,14 +37,12 @@ def print_center(stdscr, text):
 def start_launch(launch_name, stdscr):
     stdscr.nodelay(1)
     gpio.setup(396,gpio.IN)
-    val_gpio = gpio.read(396)
     rospy.init_node('heron')
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, True)
     roslaunch.configure_logging(uuid)
     launch = roslaunch.parent.ROSLaunchParent(uuid, ['/home/nvidia/catkin_ws/src/heron_software/src/launch/'+launch_name+'.launch'])
     launch.start()
     while stdscr.getch() != 27 and gpio.read(396) != 0:
-        print(val_gpio)
         pass
     launch.shutdown()
 
