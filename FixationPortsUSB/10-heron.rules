@@ -5,3 +5,6 @@ KERNELS=="1-2.3.1", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="robot
 KERNELS=="1-2.4.4", SUBSYSTEMS=="usb", ATTRS{serial}=="SDC2XXX", SYMLINK+="roboteq_front"
 SUBSYSTEMS=="usb", ATTRS{manufacturer}=="Silicon Labs", ATTRS{serial}=="0001", SYMLINK+="lidar"
 SUBSYSTEMS=="usb", DRIVERS=="ch341", ATTRS{bInterfaceClass}=="ff", SYMLINK+="usb_can_analyzer"
+SUBSYSTEM=="gpio", PROGRAM="/bin/sh -c 'chmod -R 777 /sys/class/gpio'"
+SUBSYSTEM=="gpio", PROGRAM="/bin/sh -c 'echo 396 > /sys/class/gpio/export'"
+SUBSYSTEM=="gpio", PROGRAM="/bin/sh -c 'chmod -R 777 /sys/class/gpio/gpio396'"
