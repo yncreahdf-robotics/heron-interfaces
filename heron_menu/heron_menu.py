@@ -13,7 +13,7 @@ def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
     consigne = "Use arrows to navigate and then ENTER :"
-    stdscr.addstr(h//2 - len(menu)//2 - 2, w//2 - len(consigne)//2,consigne)
+    stdscr.addstr(h//2 - len(menu)//2 - 2,w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):
         x = w//2 - len(row)//2
         y = h//2 - len(menu)//2 + idx
@@ -35,33 +35,20 @@ def print_center(stdscr, text):
     stdscr.refresh()
 
 def start_launch(launch_name, stdscr):
+    stdscr.nodelay(1)
     gpio.setup(396,gpio.IN)
     val_gpio = gpio.read(396)
     emergency = False
     echap = False
-    while emergency == False:
-        uuid = roslaunch.rlutil.get_or_generate_uuid(None, True)
-        roslaunch.configure_logging(uuid)
-        launch = roslaunch.parent.ROSLaunchParent(uuid, ['/home/nvidia/catkin_ws/src/heron_software/src/launch/'+launch_name+'.launch'])
-        launch.start()
-        while echap == False and emergency == False:
-            val_gpio = gpio.read(396)
-            if stdscr.getch() == 27:
-                echap = True
-            elif val_gpio == 0:
-                emergency = True
-            else:
-                pass
-        launch.shutdown()
-        if echap == True:
-            break
-        else:
-            while emergency == True:
-                val_gpio = gpio.read(396)
-                if val_gpio == 1:
-                    emergency = False
-                else:
-                    pass
+    rospy.init_node('heron')
+    uuid = roslaunch.rlutil.get_or_generate_uuid(None, True)
+    roslaunch.configure_logging(uuid)
+    launch = roslaunch.parent.ROSLaunchParent(uuid, ['/home/nvidia/catkin_ws/src/heron_software/src/launch/'+launch_name+'.launch'])
+    launch.start()
+    while stdscr.getch() != 27 and gpio.read(396) != 0:
+        print(val_gpio)
+        pass
+    launch.shutdown()
 
 def main(stdscr):
     # turn off cursor blinking
