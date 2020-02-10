@@ -38,8 +38,6 @@ def start_launch(launch_name, stdscr):
     stdscr.nodelay(1)
     gpio.setup(396,gpio.IN)
     val_gpio = gpio.read(396)
-    emergency = False
-    echap = False
     rospy.init_node('heron')
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, True)
     roslaunch.configure_logging(uuid)
