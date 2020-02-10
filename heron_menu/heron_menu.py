@@ -1,5 +1,4 @@
-# coding: utf-8
-#!/usr/bin/python2.7
+#!/usr/bin/env python
 
 import roslaunch
 import rospy
@@ -8,12 +7,13 @@ import gpio
 
 menu = ['Controle par manette', 'Navigation', 'Mapping', 'Prise de positions', 'Exit']
 
-gpio.setup(396,gpio.IN)
 
 
 def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
+    consigne = "Use arrows to navigate and then ENTER :"
+    stdscr.addstr(h-35, w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):
         x = w//2 - len(row)//2
         y = h//2 - len(menu)//2 + idx
@@ -35,17 +35,17 @@ def print_center(stdscr, text):
     stdscr.refresh()
 
 def start_launch(launch_name, stdscr):
+    gpio.setup(396,gpio.IN)
     val_gpio = gpio.read(396)
-    val_gpio = 1
     emergency = False
     echap = False
     while emergency == False:
         uuid = roslaunch.rlutil.get_or_generate_uuid(None, True)
         roslaunch.configure_logging(uuid)
-        launch = roslaunch.parent.ROSLaunchParent(uuid, ['/home/sly/catkin_ws/src/heron_software/src/launch/'+launch_name+'.launch'])
+        launch = roslaunch.parent.ROSLaunchParent(uuid, ['/home/nvidia/catkin_ws/src/heron_software/src/launch/'+launch_name+'.launch'])
         launch.start()
         while echap == False and emergency == False:
-            val_gpio = gpio.read(396) 
+            val_gpio = gpio.read(396)
             if stdscr.getch() == 27:
                 echap = True
             elif val_gpio == 0:
@@ -58,7 +58,7 @@ def start_launch(launch_name, stdscr):
         else:
             while emergency == True:
                 val_gpio = gpio.read(396)
-                if val_gpio == 1:  
+                if val_gpio == 1:
                     emergency = False
                 else:
                     pass
@@ -75,10 +75,10 @@ def main(stdscr):
 
     # print the menu
     print_menu(stdscr, current_row)
-    
+
     while 1:
         key = stdscr.getch()
-        
+
         if key == curses.KEY_UP and current_row > 0:
             current_row -= 1
         elif key == curses.KEY_DOWN and current_row < len(menu)-1:
@@ -103,4 +103,3 @@ def main(stdscr):
 
 
 curses.wrapper(main)
-
