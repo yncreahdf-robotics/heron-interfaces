@@ -4,6 +4,9 @@ import roslaunch
 import rospy
 import curses
 import gpio
+import subprocess
+import os
+import time
 
 menu = ['Controle par manette', 'Navigation', 'Mapping', 'Prise de positions', 'Exit']
 
@@ -12,7 +15,7 @@ menu = ['Controle par manette', 'Navigation', 'Mapping', 'Prise de positions', '
 def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
-    consigne = "Use arrows to navigate and then ENTER :"
+    consigne = "Use arrows to navigate and then ENTER :(ESC to leave mode)"
     stdscr.addstr(h//2 - len(menu)//2 - 2,w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):
         x = w//2 - len(row)//2
@@ -25,6 +28,9 @@ def print_menu(stdscr, selected_row_idx):
             stdscr.addstr(y, x, row)
     stdscr.refresh()
 
+def set_environment(ip_master, ip):
+    os.environ['ROS_MASTER_URI']="http://"+ip_master+":11311"
+    os.environ['ROS_HOSTNAME']=ip
 
 def print_center(stdscr, text):
     stdscr.clear()
@@ -71,7 +77,13 @@ def main(stdscr):
             stdscr.clear()
             stdscr.refresh()
             if current_row == 0:
+                set_environment("localhost","localhost")
+                roscore = subprocess.Popen('roscore')
+                time.sleep(1)
                 start_launch('heronController', stdscr)
+                time.sleep(1)
+                roscore.terminate()
+                time.sleep(1)
             if current_row == 1:
                 start_launch('bringUp', stdscr)
             if current_row == 2:
