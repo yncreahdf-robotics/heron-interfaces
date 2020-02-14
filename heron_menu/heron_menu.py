@@ -32,6 +32,9 @@ def set_environment(ip_master, ip):
     os.environ['ROS_MASTER_URI']="http://"+ip_master+":11311"
     os.environ['ROS_HOSTNAME']=ip
 
+def get_environment():
+    return os.environ['ROS_MASTER_URI'], os.environ['ROS_HOSTNAME']
+
 def print_center(stdscr, text):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
@@ -77,13 +80,15 @@ def main(stdscr):
             stdscr.clear()
             stdscr.refresh()
             if current_row == 0:
-                set_environment("localhost","localhost")
+                master, ip = get_environment()
+                set_environment("http://localhost:11311","localhost")
                 roscore = subprocess.Popen('roscore')
                 time.sleep(1)
                 start_launch('heronController', stdscr)
                 time.sleep(1)
                 roscore.terminate()
                 time.sleep(1)
+                set_environment(master,ip)
             if current_row == 1:
                 start_launch('bringUp', stdscr)
             if current_row == 2:
