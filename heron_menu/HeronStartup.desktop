@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=HeronStartup
+Comment=HeronStartup
+Icon=/home/nvidia/Desktop/.logo_heron.ico
+Exec=zsh -c "source /home/nvidia/.zshrc && python /home/nvidia/heron-interfaces/heron_menu/heron_menu.py"
+Terminal=true
+Type=Application

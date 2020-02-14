@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=MasterStartup
+Comment=MasterStartup
+Exec=zsh -c "source /home/centralheron/.zshrc && python /home/centralheron/heron-interfaces/heron_menu/master_menu.py"
+Terminal=true
+Icon=/home/centralheron/Desktop/.logo_heron.ico
