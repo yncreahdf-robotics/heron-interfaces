@@ -28,8 +28,8 @@ def print_menu(stdscr, selected_row_idx):
             stdscr.addstr(y, x, row)
     stdscr.refresh()
 
-def set_environment(ip_master, ip):
-    os.environ['ROS_MASTER_URI']="http://"+ip_master+":11311"
+def set_environment(master, ip):
+    os.environ['ROS_MASTER_URI']=master
     os.environ['ROS_HOSTNAME']=ip
 
 def get_environment():
