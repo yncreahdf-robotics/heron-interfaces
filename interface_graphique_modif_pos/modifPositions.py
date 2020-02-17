@@ -1,5 +1,6 @@
 # coding: utf-8
 from tkinter import *
+import sys
 
 
 window = Tk()
@@ -41,10 +42,12 @@ Frame6.pack(side=TOP, pady=10)
 var=[]
 
 def openFile(mode):
-    return open("MapKeyPos.txt", mode)
+    return open("/home/centralheron/MapKeyPos.txt", mode)
 
 file = openFile("r")
 content = file.readlines()
+if(len(content) == 0):
+    sys.exit()
 description = content[0]
 lines = content[1::]
 positions=[]
@@ -64,9 +67,9 @@ for line in lines:
 
 def modifier():
     for i in range(0,len(listOfTextbox)):
-        print (textbox.get())
+        #print (textbox.get())
         var[i][0]=listOfTextbox[i].get()
-    print(var)
+    #print(var)
     file = openFile("w")
     file.write(description)
     for line in var:

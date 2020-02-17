@@ -7,7 +7,7 @@ import subprocess
 import os
 import time
 
-menu = ['Navigation', 'Mapping', 'Exit']
+menu = ['Navigation', 'Mapping', 'Rename Key Positions ', 'Exit']
 
 
 def print_menu(stdscr, selected_row_idx):
@@ -51,6 +51,16 @@ def start_launch(launch_name, stdscr, current_row):
     roscore.terminate()
     time.sleep(1)
 
+
+def start_program(stdscr):
+    stdscr.nodelay(1)
+    command = "python3 /home/centralheron/heron-interfaces/interface_graphique_modif_pos/modifPositions.py"
+    program = subprocess.Popen(command.split())
+    print_center(stdscr, "Click on [close] to get back to the menu.")
+    while program.poll() == None:
+        pass
+
+
 def main(stdscr):
     # turn off cursor blinking
     curses.curs_set(0)
@@ -75,9 +85,13 @@ def main(stdscr):
             stdscr.clear()
             stdscr.refresh()
             if current_row == 0:
-                start_launch('master', stdscr,current_row)
+                start_launch('master_navigation', stdscr,current_row)
             if current_row == 1:
-                start_launch('master', stdscr,current_row)
+                start_launch('display_mapping', stdscr,current_row)
+            if current_row == 2:
+                start_program(stdscr)
+                
+
             # if user selected last row, exit the program
             if current_row == len(menu)-1:
                 break
