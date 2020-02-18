@@ -7,7 +7,7 @@ import subprocess
 import os
 import time
 
-menu = ['Navigation', 'Mapping', 'Rename Key Positions ', 'Exit']
+menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Rename Key Positions ', 'Exit']
 
 
 def print_menu(stdscr, selected_row_idx):
@@ -52,13 +52,17 @@ def start_launch(launch_name, stdscr, current_row):
     time.sleep(1)
 
 
-def start_program(stdscr):
-    stdscr.nodelay(1)
+def start_program1(stdscr):
     command = "python3 /home/centralheron/heron-interfaces/interface_graphique_modif_pos/modifPositions.py"
     program = subprocess.Popen(command.split())
     print_center(stdscr, "Click on [close] to get back to the menu.")
     while program.poll() == None:
         pass
+
+def start_program2():
+    command = "python3 /home/centralheron/heron-interfaces/navigation/navigationGoal.py"
+    return subprocess.Popen(command.split())
+    
 
 
 def main(stdscr):
@@ -85,12 +89,28 @@ def main(stdscr):
             stdscr.clear()
             stdscr.refresh()
             if current_row == 0:
+                prog = start_program2()
                 start_launch('master_navigation', stdscr,current_row)
+                prog.terminate()
             if current_row == 1:
-                start_launch('display_mapping', stdscr,current_row)
+                stdscr.addstr("Are you sure ? \nPress ENTER and it will delete the old map.\nPress any other key to go back to menu.")
+                key = stdscr.getch()
+                if key == curses.KEY_ENTER or key in [10, 13]:
+                    stdscr.clear()
+                    start_launch('display_mapping', stdscr,current_row)
+                else:
+                    pass
             if current_row == 2:
-                start_program(stdscr)
+                stdscr.addstr("Are you sure ? \nPress ENTER and it will delete the old positions.\nPress any other key to go back to menu.")
+                key = stdscr.getch()
+                if key == curses.KEY_ENTER or key in [10, 13]:
+                    stdscr.clear()
+                    start_launch('take_key_position',stdscr,current_row)
+                else:
+                    pass
                 
+            if current_row == 3:
+                start_program1(stdscr)
 
             # if user selected last row, exit the program
             if current_row == len(menu)-1:
