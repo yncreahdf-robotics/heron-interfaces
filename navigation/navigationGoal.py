@@ -14,8 +14,8 @@ goals=[]
 
 def sendGoal(x,y,z,w,h):
     print("sending")
-    command = ["rostopic", "pub", "/Heron01/move_to", "heron/Motion", '{position_x: '+str(x)+', position_y: '+str(y)+', orientation_z: '+str(z)+', orientation_w: '+str(w)+', plate_height: '+str(h)+'}']
-    p = subprocess.check_call(command)
+    command = ["rostopic", "pub", "-1", "/Heron01/move_to", "heron/Motion", '{position_x: '+str(x)+', position_y: '+str(y)+', orientation_z: '+str(z)+', orientation_w: '+str(w)+', plate_height: '+str(h)+'}']
+    subprocess.Popen(command)
     time.sleep(2)
 
 def openFile(mode):
