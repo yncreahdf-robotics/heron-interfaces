@@ -9,10 +9,10 @@ window.resizable(0, 0)
 
 window.title("Edit Key Positions")
 
-consigne = "Modifiez le nom des positions dans les champs puis cliquez sur modifier pour appliquer les changements."
+consigne = "Rename key positions and Delete unwanted ones.\nThen click on [Save and Close] to save your changes OR close the window to discard changes (upper corner red cross)."
 Frame1 = Frame(window, borderwidth=1, relief=GROOVE)
 Frame1.pack(side=TOP, padx=30, pady=10)
-Label(Frame1, text = consigne).pack(padx=30, pady=30)
+Label(Frame1, text = consigne).pack(padx=15, pady=15)
 
 
 Frame2 = Frame(window, borderwidth=2, relief=GROOVE)
@@ -23,7 +23,7 @@ Frame5 = Frame(Frame2,borderwidth=2, relief=GROOVE)
 Frame5.pack(side=TOP, anchor=NE)
 Label(Frame5, text="Position",width=32).pack(side=LEFT)
 Label(Frame5, text="Orientation",width=32).pack(side=LEFT)
-Label(Frame5, text="Hauteur",width=17).pack(side=LEFT)
+Label(Frame5, text="Height",width=17).pack(side=LEFT)
 
 Frame3 = Frame(Frame2, borderwidth=2, relief=GROOVE)
 Frame3.pack(side=TOP, anchor=NE)
@@ -65,11 +65,12 @@ for line in lines:
     var.append([pos, x, y, z, w, h])
 
 
-def modifier():
-    for i in range(0,len(listOfTextbox)):
-        #print (textbox.get())
+def fermerSauvegarder():
+    global listOfTextbox
+
+    for i in range(len(var)):
         var[i][0]=listOfTextbox[i].get()
-    #print(var)
+
     file = openFile("w")
     file.write(description)
     for line in var:
@@ -78,25 +79,52 @@ def modifier():
             file.write(value + ";")
         file.write(str(line[len(line)-1]) + "\n")
     file.close()
+    window.destroy()
 
 
-boutonModifier = Button(Frame6, text='modifier',command=modifier, borderwidth=1).pack()
-for ligne in range(nbPositions):
-    value = StringVar()
-    value.set(str(var[ligne][0]))
-    textbox = Entry(Frame4, textvariable=value, width=20,selectborderwidth=4)
-    textbox.grid(row=ligne,column=2)
-    listOfTextbox.append(textbox)
+def supprimer(ligne):
+    global listOfTextbox
+    global nbPositions
+    
+    var.pop(ligne)
+    listOfTextbox.pop(ligne)
+    nbPositions = nbPositions - 1
 
-    for colonne in range(6):
-        labelx = Label(Frame4, text=var[ligne][1],width=16, bg="white").grid(row=ligne,column=3)
-        labely = Label(Frame4, text=var[ligne][2],width=16, bg="white").grid(row=ligne,column=4)
-        labelz = Label(Frame4, text=var[ligne][3],width=16, bg="white").grid(row=ligne,column=5)
-        labelw = Label(Frame4, text=var[ligne][4],width=16, bg="white").grid(row=ligne,column=6)
-        labelh = Label(Frame4, text=var[ligne][5],width=16, bg="white").grid(row=ligne,column=7)
-
-closeButton = Button(window, text="close", command=window.destroy)
-closeButton.pack(anchor=SE)
+    update()
 
 
+
+def update():    
+    global Frame4
+    Frame4.destroy()
+    Frame4 = Frame(Frame2, borderwidth=2, relief=GROOVE)
+    Frame4.pack(side=TOP)
+    listOfTextbox.clear()
+
+    for ligne in range(nbPositions):
+        value = StringVar()
+        value.set(str(var[ligne][0]))
+        textbox = Entry(Frame4, textvariable=value, width=20, selectborderwidth=4, justify="right")
+        textbox.grid(row=ligne,column=2)
+        listOfTextbox.append(textbox)
+
+        for colonne in range(6):
+
+            labelx = Label(Frame4, text=var[ligne][1],width=16, bg="white").grid(row=ligne,column=3)
+            labely = Label(Frame4, text=var[ligne][2],width=16, bg="white").grid(row=ligne,column=4)
+            labelz = Label(Frame4, text=var[ligne][3],width=16, bg="white").grid(row=ligne,column=5)
+            labelw = Label(Frame4, text=var[ligne][4],width=16, bg="white").grid(row=ligne,column=6)
+            labelh = Label(Frame4, text=var[ligne][5],width=16, bg="white").grid(row=ligne,column=7)
+            
+            
+            suppr = Button(Frame4, text='Delete',command= lambda l=ligne : supprimer(l), borderwidth=1)
+            suppr.grid(row=ligne,column=1)
+            suppr.config(padx=10, pady=-1, bg="#E84E48")
+
+
+closeButton = Button(window, text="Save and Close", command=fermerSauvegarder)
+closeButton.pack(anchor=SE, padx=5, pady=5)
+closeButton.config(bg="#6EFF6E")
+
+update()
 window.mainloop()

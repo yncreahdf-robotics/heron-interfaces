@@ -10,11 +10,9 @@ window['bg']='white'
 window.title("Navigation Goal")
 window.resizable(0, 0)
 
-goals=[]
-
-def sendGoal(x,y,z,w,h):
+def sendGoal(pos):
     print("sending")
-    command = ["rostopic", "pub", "-1", "/Heron01/move_to", "heron/Motion", '{position_x: '+str(x)+', position_y: '+str(y)+', orientation_z: '+str(z)+', orientation_w: '+str(w)+', plate_height: '+str(h)+'}']
+    command = ["rostopic", "pub", "-1", "/Heron01/move_to", "heron/Motion", '{position_x: '+str(pos[0])+', position_y: '+str(pos[1])+', orientation_z: '+str(pos[2])+', orientation_w: '+str(pos[3])+', plate_height: '+str(pos[4])+'}']
     subprocess.Popen(command)
     time.sleep(2)
 
@@ -38,8 +36,11 @@ def load():
         w = float(line.split(":")[1].split(";")[3])
         h = float(line.split(":")[1].split(";")[4].split("\n")[0])
 
-        GoalButton = Button(window, text=name, command= lambda: sendGoal(x,y,z,w,h))
+        GoalButton = Button(window, text=name, height=2, width=50, command= lambda p=[x,y,z,w,h,name] : sendGoal(p))
         GoalButton.pack(side=TOP)
+
+    
+
 
 
     # file = openFile("w")
