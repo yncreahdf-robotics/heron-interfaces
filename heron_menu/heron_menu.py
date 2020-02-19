@@ -8,7 +8,7 @@ import subprocess
 import os
 import time
 
-menu = ['Controle par manette', 'Navigation', 'Mapping', 'Prise de positions', 'Exit']
+menu = ['Remote Control', 'Navigation', 'Mapping', 'Take Key Positions', 'Exit']
 
 
 

@@ -74,7 +74,7 @@ def fermerSauvegarder():
     file = openFile("w")
     file.write(description)
     for line in var:
-        file.write(line[0] + " :")
+        file.write(line[0] + ":")
         for value in line[1:-1]:
             file.write(value + ";")
         file.write(str(line[len(line)-1]) + "\n")

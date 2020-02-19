@@ -7,7 +7,7 @@ import subprocess
 import os
 import time
 
-menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Rename Key Positions ', 'Exit']
+menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Edit Key Positions ', 'Exit']
 
 
 def print_menu(stdscr, selected_row_idx):
