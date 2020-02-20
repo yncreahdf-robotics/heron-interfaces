@@ -79,7 +79,7 @@ def main(stdscr):
 
     while 1:
         key = stdscr.getch()
-
+        stdscr.nodelay(0)
         if key == curses.KEY_UP and current_row > 0:
             current_row -= 1
         elif key == curses.KEY_DOWN and current_row < len(menu)-1:
