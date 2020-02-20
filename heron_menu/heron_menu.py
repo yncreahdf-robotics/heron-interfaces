@@ -15,6 +15,7 @@ menu = ['Remote Control', 'Navigation', 'Mapping', 'Take Key Positions', 'Exit']
 def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
+    stdscr.addstr(h//2 - len(menu)//2 - 7,w//2 - len("MENU HERON")//2,"MENU HERON")
     consigne = "Use arrows to navigate and then ENTER :(ESC to leave mode)"
     stdscr.addstr(h//2 - len(menu)//2 - 2,w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):

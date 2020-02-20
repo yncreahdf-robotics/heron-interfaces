@@ -13,6 +13,7 @@ menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Edit Key Positions ', 'E
 def print_menu(stdscr, selected_row_idx):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
+    stdscr.addstr(h//2 - len(menu)//2 - 7,w//2 - len("MENU MASTER")//2,"MENU MASTER")
     consigne = "Use arrows to navigate and then ENTER :(ESC to leave mode)"
     stdscr.addstr(h//2 - len(menu)//2 - 2,w//2 - len(consigne)//2,consigne)
     for idx, row in enumerate(menu):
