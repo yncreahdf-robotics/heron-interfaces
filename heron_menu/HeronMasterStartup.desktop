@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=HeronMasterStartup
-Comment=HeronMasterStartup
+Name=Heron
+Comment=Heron
 Exec=zsh -c "ssh -t nvidia@10.224.0.51 'source .zshrc && python /home/nvidia/heron-interfaces/heron_menu/heron_menu.py'"
 Terminal=true
 Icon=/home/centralheron/Desktop/.logo_heron2.ico
