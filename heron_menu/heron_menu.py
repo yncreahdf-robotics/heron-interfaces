@@ -20,7 +20,7 @@ def modifIP(stdscr):
     ip_heron = stdscr.getstr()
     curses.noecho()
 
-    file = open("/home/centralheron/.zshrc", "r")
+    file = open("/home/nvidia/.zshrc", "r")
     content=file.readlines()
     file.close()
     for i in range(len(content)):
@@ -29,7 +29,7 @@ def modifIP(stdscr):
         if ("ROS_HOSTNAME") in content[i]:
             content[i] = "\nexport ROS_HOSTNAME="+ip_heron+"\n"
 
-    file2 = open("/home/centralheron/.zshrc", "w")
+    file2 = open("/home/nvidia/.zshrc", "w")
     for line in content:
         file2.write(line)
     file2.close()
