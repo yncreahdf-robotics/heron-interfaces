@@ -15,29 +15,29 @@ import rospy
 import PubForHeron
 
 
-#from geometry_msgs.msg import Twist
-#from std_msgs.msg import Bool
-#from heron.msg import Motion
+from geometry_msgs.msg import Twist
+from std_msgs.msg import Bool
+from heron.msg import Motion
 
 
 HERON_ID='Heron01'
 
-#rospy.init_node('centralheron', anonymous=True)
-#velocity_publisher = rospy.Publisher('/'+HERON_ID+'/cmd_vel', Twist, queue_size=10)
-#zone_publisher = rospy.Publisher('/'+HERON_ID+'/move_to', Motion, queue_size=10)
-#rospy.sleep(1)
+rospy.init_node('centralheron', anonymous=True)
+velocity_publisher = rospy.Publisher('/'+HERON_ID+'/cmd_vel', Twist, queue_size=10)
+zone_publisher = rospy.Publisher('/'+HERON_ID+'/move_to', Motion, queue_size=10)
+rospy.sleep(1)
 
-#import PubForHeron
+import PubForHeron
 
-#import rospy
-#from std_msgs.msg import String
+import rospy
+from std_msgs.msg import String
 
 HERON_ID='Heron01'
 
 
-#ListFunction=[['DICTIONNARY','DICTIONNARY',''],
-#['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est'],
-#['CIRCLE','CIRCLE',''],['ZONE','ZONE(ZoneName)','Send Robot to the zone named "BANC", "BASE", "STOCK"']]
+ListFunction=[['DICTIONNARY','DICTIONNARY',''],
+['TEMPERATURE','TEMPERATURE(nZone)','Return in Comm the TEMPERATURE of the zone : BCPU-therm / MCPU-therm / GPU-therm / PLL-therm / Tboard_tegra / Tdiode_tegra / PMIC-Die / thermal-fan-est'],
+['CIRCLE','CIRCLE',''],['ZONE','ZONE(ZoneName)','Send Robot to the zone named "BANC", "BASE", "STOCK"']]
 
 
 
@@ -50,7 +50,7 @@ def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et sto
 
 def InitConnection(name):
 
-    Server = '10.224.0.52' #IP du Server
+    Server = '192.168.0.105' #IP du Server
     passwd=RecovPass() #Récupération de la Phrase de passe
 
 

@@ -46,7 +46,7 @@ def InitConnection(c,addr,passwd):
             if(data2==passwd[start:start+24]):
                 print("yes")
                 resp=SQLTools.InsertID(nameasked)
-                SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","10.224.0.52")
+                SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","192.168.0.105")
                 c.send(str(resp).encode('ascii'))
             else:
                 c.send("No!".encode('ascii'))
@@ -54,7 +54,7 @@ def InitConnection(c,addr,passwd):
 
         """---------Sans cette couche-----------------------"""
         #resp=SQLTools.InsertID(nameasked)
-        #SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","10.224.0.52")
+        #SQLTools.InsertCOMMANDS("Init-Central/"+resp,resp,"DICTIONNARY","192.168.0.105")
         #c.send("resp".encode('ascii'))
 
 def Main():

@@ -48,8 +48,6 @@ def Circle(velocity_publisher):
 
 
 
-
-
 def Zone(position_x,position_y,orientation_z,orientation_w,plate_height,zone_publisher):
 
     msg_Zone=Motion()

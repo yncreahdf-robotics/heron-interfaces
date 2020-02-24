@@ -50,10 +50,37 @@ def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et sto
     data=f.read()
     f.close()
     return(data)
+    
+def openFile(mode):
+    return open("/home/centralheron/MapKeyPos.txt", mode)
+    
+def load():
+    file = openFile("r")
+    content = file.readlines()
+    file.close()
+    if(len(content) == 0):
+        sys.exit()
+
+    lines = content[1::]
+    
+    Ret=[]
+
+    for line in lines:
+        name = line.split(":")[0]
+        x = float(line.split(":")[1].split(";")[0])
+        y = float(line.split(":")[1].split(";")[1])
+        z = float(line.split(":")[1].split(";")[2])
+        w = float(line.split(":")[1].split(";")[3])
+        h = float(line.split(":")[1].split(";")[4].split("\n")[0])
+        Ret.append([name,x,y,z,w,h])
+        
+    return Ret
+        
+    
 
 def InitConnection(name):
 
-    Server = '10.224.0.52' #IP du Server
+    Server = '192.168.0.105' #IP du Server
     passwd=RecovPass() #Récupération de la Phrase de passe
 
 
@@ -70,14 +97,150 @@ def InitConnection(name):
     s.close()#Fermeture de la connection
     return data2
 
-ID=InitConnection("heron")
+#ID=InitConnection("heron")
+
+
 
 print("----------------------")
 
-#InsertTools.InsertCOMMANDS('fortheTest',ID,'TEMPERATURE(4)','fortheTest',com=None)
 
 now=time.time()
-while(time.time()-now<300):
+while(time.time()-now<600):
+    InsertTools.InsertCOMMANDS(HERON_ID,HERON_ID,"DEMOSPRINT","Central",com=None)
+    itDemo=0
+    commands=SELECTTools.CommandsFor(HERON_ID)
+    
+    for elt in commands:
+        LineOrder,OrderID,Function,Target,Status,Source,ComOrder=elt[0],elt[1],elt[2],elt[3],elt[4],elt[5],elt[6]
+        if(Status=='waiting'):
+                if(Status=='waiting'):
+
+                    if(Function=='DEMOSPRINT'):
+                        InsertTools.ChangeCOMMANDS("accepted",LineOrder)
+                        itDemo+=1
+                        print("---------PHASE 1-----------")
+
+                        ref1,ref2="DemoPhase1-"+str(itDemo)+"-Heron","DemoPhase1-"+str(itDemo)+"-Niryo"
+
+                        #A décom
+                        InsertTools.InsertCOMMANDS(ref2,"niryo-1","TAKE(STOCK,0)","Central",com=None)
+
+
+                        
+                        #status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+                        
+                        #A décom
+                        status2=SELECTTools.SELECT("COMMANDS","OrderID='"+ref2+"'")[0][4]
+                        
+                        for pos in load():
+                            if ('niryo-1' in pos[0]):
+                                x,y,z,w,h=pos[1],pos[2],pos[3],pos[4],pos[5]
+                                
+                        PubForHeron.Zone(x,y,z,w,h,zone_publisher)
+                        
+
+                        #A décom
+                        while(status2!='done'):
+
+
+                            #status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+                            #A décom
+                            status2=SELECTTools.SELECT("COMMANDS","OrderID='"+ref2+"'")[0][4]
+
+                            #print("status1 : ",status1)
+                            #A décom
+                            print("status2 : ",status2)
+                            
+                        ref2=ref2+"bis"
+                        InsertTools.InsertCOMMANDS(ref2,"niryo-1","RELEASE()","Central",com=None)
+                        
+                        status2=SELECTTools.SELECT("COMMANDS","OrderID='"+ref2+"'")[0][4]
+                        
+                        while(status2!='done'):
+
+
+                            #status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+                            #A décom
+                            status2=SELECTTools.SELECT("COMMANDS","OrderID='"+ref2+"'")[0][4]
+
+                            #print("status1 : ",status1)
+                            #A décom
+                            print("status2 : ",status2)
+
+
+
+                        print("---------PHASE 2-----------")
+
+                        ref1="DemoPhase1b-"+str(itDemo)+"-Niryo"
+                        #A décom
+                        InsertTools.InsertCOMMANDS(ref1,"niryo-2","PREPARE(ROBOT)","Central",com=None)
+
+                        #A décom
+                        status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        #A décom
+                        while(status1!='done'):
+                            #A décom
+                            status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        print("---------PHASE 3-----------")
+
+                        #ref1="DemoPhase3-"+str(itDemo)+"-Heron"
+                        #InsertTools.InsertCOMMANDS(ref1,"heron-1","ZONE(BANC)","Central",com=None)
+
+                        #status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        #while(status1!='done'):
+                        #    status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        for pos in load():
+                            if ('niryo-2' in pos[0]):
+                                x,y,z,w,h=pos[1],pos[2],pos[3],pos[4],pos[5]
+                                
+                        PubForHeron.Zone(x,y,z,w,h,zone_publisher)
+                        
+
+                        print("---------PHASE 4-----------")
+
+
+                        #A décom
+                        ref1="DemoPhase1b-"+str(itDemo)+"-Niryo"
+                        #A décom
+                        InsertTools.InsertCOMMANDS(ref1,"niryo-2","TAKE(ROBOT)","Central",com=None)
+
+                        #A décom
+                        status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        #A décom
+                        while(status1!='done'):
+                            #A décom
+                            status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+
+                        print("---------PHASE 5-----------")
+
+                        #ref1="DemoPhase5-"+str(itDemo)+"-Heron"
+                        #InsertTools.InsertCOMMANDS(ref1,"heron-1","ZONE(BASE)","Central",com=None)
+
+                        #status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        #while(status1!='done'):
+                        #    status1=SELECTTools.SELECT("COMMANDS","OrderID='"+ref1+"'")[0][4]
+
+                        for pos in load():
+                            if ('Base' in pos[0]):
+                                x,y,z,w,h=pos[1],pos[2],pos[3],pos[4],pos[5]
+                                
+                        PubForHeron.Zone(x,y,z,w,h,zone_publisher)
+
+                        InsertTools.ChangeCOMMANDS("done",LineOrder)
+
+
+
+
+"""
+now=time.time()
+while(time.time()-now<600):
     commands=SELECTTools.CommandsFor(ID)
     for elt in commands:
         LineOrder,OrderID,Function,Target,Status,Source,ComOrder=elt[0],elt[1],elt[2],elt[3],elt[4],elt[5],elt[6]
@@ -113,7 +276,7 @@ while(time.time()-now<300):
 
                     if('ZONE' in Function):
 
-                        print("Zone")
+                        
 
                         if('BANC' in Function):
                             print("Banc")
@@ -128,3 +291,5 @@ while(time.time()-now<300):
                         InsertTools.ChangeCOMMANDS("accepted",LineOrder)
                         PubForHeron.Zone(position_x,position_y,orientation_z,orientation_w,plate_height,zone_publisher)
                         InsertTools.ChangeCOMMANDS("done",LineOrder)
+"""
+print("end")

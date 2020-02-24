@@ -6,8 +6,49 @@ import curses
 import subprocess
 import os
 import time
+import sys
 
-menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Edit Key Positions ', 'Exit']
+menu = ['Navigation', 'Mapping', 'Take Key Positions', 'Edit Key Positions', 'IP Config (Restart after)', 'Exit']
+
+
+def modifIP(stdscr):
+    stdscr.clear()
+    curses.echo()
+    stdscr.addstr("Adresse IP Master ? (Enter to continue)\n")
+    ip_master = stdscr.getstr()
+    stdscr.clear()
+    stdscr.addstr("Adresse IP Heron ? (Enter to continue)\n")
+    ip_heron = stdscr.getstr()
+    curses.noecho()
+
+    file = open("/home/centralheron/.zshrc", "r")
+    content=file.readlines()
+    file.close()
+    for i in range(len(content)):
+        if ("ROS_MASTER") in content[i]:
+            content[i] = "export ROS_MASTER_URI=http://"+ip_master+":11311"
+        if ("ROS_HOSTNAME") in content[i]:
+            content[i] = "\nexport ROS_HOSTNAME="+ip_master+"\n"
+
+    file2 = open("/home/centralheron/.zshrc", "w")
+    for line in content:
+        file2.write(line)
+    file2.close()
+
+    file3 = open("/home/centralheron/Desktop/HeronMasterStartup.desktop", "r")
+    content=file3.readlines()
+    file3.close()
+    for i in range(len(content)):
+        if "Exec" in content[i]:
+            content[i] = 'Exec=zsh -c "ssh -t nvidia@'+ip_heron+' \'source .zshrc && python /home/nvidia/heron-interfaces/heron_menu/heron_menu.py\'"\n'
+    file4 = open("/home/centralheron/Desktop/HeronMasterStartup.desktop", "w")
+
+    for line in content:
+        file4.write(line)
+
+    file4.close()
+
+
 
 
 def print_menu(stdscr, selected_row_idx):
@@ -113,6 +154,13 @@ def main(stdscr):
             if current_row == 3:
                 start_program1(stdscr)
 
+            if current_row == 4:
+                stdscr.addstr("Are you sure ? Press ENTER and it will delete the old IP\nRestart the program after to make the changes")
+                key = stdscr.getch()
+                if key == curses.KEY_ENTER or key in [10, 13]:
+                    modifIP(stdscr)
+                else:
+                    pass
             # if user selected last row, exit the program
             if current_row == len(menu)-1:
                 break

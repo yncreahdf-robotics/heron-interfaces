@@ -21,7 +21,7 @@ def RecovPass():#Récupère la phrase de passe à l'intérieur du fichier et sto
 
 def InitConnection(name):
 
-    Server = '10.224.0.52' #IP du Server
+    Server = '192.168.0.105' #IP du Server
     passwd=RecovPass() #Récupération de la Phrase de passe
 
 
