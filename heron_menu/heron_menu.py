@@ -13,10 +13,10 @@ menu = ['Remote Control', 'Navigation', 'Mapping', 'Take Key Positions', 'IP Con
 def modifIP(stdscr):
     stdscr.clear()
     curses.echo()
-    stdscr.addstr("Adresse IP Master ? (Enter to continue)\n")
+    stdscr.addstr("Adresse IP PC Central ? (Enter to continue, NO SPACES)\nExample : 10.224.0.52\n")
     ip_master = stdscr.getstr()
     stdscr.clear()
-    stdscr.addstr("Adresse IP Heron ? (Enter to continue)\n")
+    stdscr.addstr("Adresse IP Heron ? (Enter to continue, NO SPACES)\nExample : 10.224.0.51\n")
     ip_heron = stdscr.getstr()
     curses.noecho()
 
@@ -120,7 +120,7 @@ def main(stdscr):
                 start_launch('take_pos', stdscr)
             # if user selected last row, exit the program
             if current_row == 4:
-                stdscr.addstr("Are you sure ? Press ENTER and it will delete the old IP\nRestart the program after to make the changes")
+                stdscr.addstr("Are you sure ? Press ENTER and it will delete the old IP\nRestart the menu when finished to save the changes")
                 key = stdscr.getch()
                 if key == curses.KEY_ENTER or key in [10, 13]:
                     modifIP(stdscr)
